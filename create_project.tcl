@@ -3,6 +3,7 @@ set project_name   "memtest"
 set project_target "xc7a35ticsg324-1L"
 set source_files { \
                   ./sources/memtest.v \
+                  ./sources/top.v \
                  }
 
 set constraint_files { \
@@ -13,6 +14,8 @@ create_project -force $project_name $project_dir -part $project_target
 add_files -norecurse $source_files
 add_files -fileset constrs_1 -norecurse $constraint_files
 import_ip -files ./ipcores/vio_0.xci
+set_property top top [current_fileset]
+
 update_compile_order -fileset sources_1
 
 reset_project
